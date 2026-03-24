@@ -67,6 +67,19 @@ class UnityPlayerUtils {
             try {
                 unityPlayer = CustomUnityPlayer(activity!!, ule)
 
+                // UnityPlayer 내부의 SurfaceView를 투명하게 설정
+                // setZOrderOnTop(true)는 Unity가 다른 UI 위에 그려지게 하며 투명도를 허용합니다.
+                // Flutter UI가 Unity 위에 올라와야 한다면 상황에 따라 조절이 필요할 수 있습니다.
+                if (unityPlayer != null) {
+                    // SurfaceView 포맷 설정
+                    (unityPlayer as ViewGroup).getChildAt(0)?.let { surfaceView ->
+                        if (surfaceView is android.view.SurfaceView) {
+                            surfaceView.setZOrderOnTop(true)
+                            surfaceView.holder.setFormat(PixelFormat.TRANSLUCENT)
+                        }
+                    }
+                }
+
                 // Assign mUnityPlayer in the Activity, see FlutterUnityActivity.kt for more details
                 if(activity is FlutterUnityActivity) {
                     (activity!! as FlutterUnityActivity)?.mUnityPlayer = (unityPlayer as java.lang.Object?);
