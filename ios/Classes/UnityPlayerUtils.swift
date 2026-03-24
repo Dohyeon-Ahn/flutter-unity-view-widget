@@ -101,8 +101,12 @@ var sharedApplication: UIApplication?
             // Unity View 배경 투명 처리
             self.ufw?.appController()?.window?.backgroundColor = .clear
             self.ufw?.appController()?.window?.isOpaque = false
-            controller?.rootView?.backgroundColor = .clear
-            controller?.rootView?.isOpaque = false
+            if let unityView = self.ufw?.appController()?.rootView {
+                unityView.isOpaque = false
+                unityView.backgroundColor = .clear
+                unityView.layer.isOpaque = false
+                unityView.layer.backgroundColor = UIColor.clear.cgColor
+            }
         }
         _isUnityLoaded = true
     }
