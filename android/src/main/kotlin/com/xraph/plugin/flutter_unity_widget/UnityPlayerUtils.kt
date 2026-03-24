@@ -2,6 +2,9 @@ package com.xraph.plugin.flutter_unity_widget
 
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.graphics.Color
+import android.graphics.PixelFormat
+import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.util.Log
 import android.view.View
@@ -84,6 +87,10 @@ class UnityPlayerUtils {
                 } else {
                     activity!!.window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
                 }
+
+                // Unity View 배경 투명 처리
+                activity!!.window.setFormat(PixelFormat.TRANSLUCENT)
+                activity!!.window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
 
                 focus()
                 callback?.onReady()

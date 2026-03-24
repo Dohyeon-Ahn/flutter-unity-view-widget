@@ -97,6 +97,12 @@ var sharedApplication: UIApplication?
             controller?.unityMessageHandler = self.unityMessageHandlers
             controller?.unitySceneLoadedHandler = self.unitySceneLoadedHandlers
             self.ufw?.appController()?.window?.windowLevel = UIWindow.Level(UIWindow.Level.normal.rawValue - 1)
+
+            // Unity View 배경 투명 처리
+            self.ufw?.appController()?.window?.backgroundColor = .clear
+            self.ufw?.appController()?.window?.isOpaque = false
+            controller?.rootView?.backgroundColor = .clear
+            controller?.rootView?.isOpaque = false
         }
         _isUnityLoaded = true
     }
